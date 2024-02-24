@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import NotFound from './pages/NotFound';
 import SignUp from './pages/SignUp/SignUp';
-import LogIn from './pages/LogIn';
+import LogIn from './pages/Login/LogIn';
 import Mail from './pages/Mail';
 import { useAppSelector } from './hooks';
 import { useValidateTokenMutation } from './features/auth/authAPI';
