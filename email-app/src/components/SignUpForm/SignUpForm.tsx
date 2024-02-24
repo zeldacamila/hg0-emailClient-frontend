@@ -11,18 +11,22 @@ const SignUpForm: React.FC = () => {
   const [signup] = useSignupMutation();
 
   const onFinish = (values: UserRegister) => {
-    signup(values)
-    .unwrap()
-    .then((data) => {
-      message.success(data?.message);
-      if(data.data){
-        dispatch(setToken(data.data.access_token));
-        dispatch(setUser(data.data.user));
-      }
-    })
-    .catch((e) => {
-      message.error(e.data?.message);
-    });
+    const modifiedValues = {
+      ...values,
+      email: `${values.email}@awesomemail.com`,
+    };
+    signup(modifiedValues)
+      .unwrap()
+      .then((data) => {
+        message.success(data?.message);
+        if (data.data) {
+          dispatch(setToken(data.data.access_token));
+          dispatch(setUser(data.data.user));
+        }
+      })
+      .catch((e) => {
+        message.error(e.data?.message);
+      });
   };
 
   return (
