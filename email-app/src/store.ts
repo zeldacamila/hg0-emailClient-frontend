@@ -13,6 +13,7 @@ REGISTER
 } from 'redux-persist';
 import userApi from './features/auth/authAPI';
 import userReducer from './features/auth/userSlice';
+import mailApi from './features/mail/mailAPI';
 
 const persistConfig = {
     key: 'root',
@@ -25,6 +26,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     user: userReducer,
     [userApi.reducerPath]: userApi.reducer,
+    [mailApi.reducerPath]: mailApi.reducer,
 });
 
 /**
@@ -42,6 +44,8 @@ export const store = configureStore({
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
         },
     })
+    .concat(userApi.middleware)
+    .concat(mailApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>

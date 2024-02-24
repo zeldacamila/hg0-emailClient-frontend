@@ -13,14 +13,14 @@ const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: fetchBaseQuery({ baseUrl: `${api_url}auth` }),
     endpoints: (builder) => ({
-        login: builder.mutation<ResponseType<DataSignin>, User>({
+        signin: builder.mutation<ResponseType<DataSignin>, User>({
             query: (body) => ({
                 url: '/signin/',
                 method: 'POST',
                 body,
             }),
         }),
-        register: builder.mutation<ResponseType<null>, UserRegister>({
+        signup: builder.mutation<ResponseType<DataSignin>, UserRegister>({
             query: (body) => ({
                 url: '/signup/',
                 method: 'POST',
@@ -29,7 +29,7 @@ const userApi = createApi({
         }),
         validateToken: builder.mutation<ResponseType<null>, string>({
             query: (token) => ({
-                url: '/validate-token/',
+                url: '/validate_token/',
                 method: 'POST',
                 body: { token },
             }),
@@ -39,7 +39,7 @@ const userApi = createApi({
 
 export default userApi;
 export const {
-    useLoginMutation, 
+    useSigninMutation,
+    useSignupMutation,
     useValidateTokenMutation,
-    useRegisterMutation,
 } = userApi;
