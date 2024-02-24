@@ -1,16 +1,33 @@
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import { Link } from 'react-router-dom';
 import './SignUpForm.css';
-
+import { UserRegister } from '../../types/user';
+import { useSignupMutation } from '../../features/auth/authAPI';
+import { useAppDispatch } from '../../hooks';
+import { setToken, setUser } from '../../features/auth/userSlice';
 const SignUpForm: React.FC = () => {
   const [form] = Form.useForm();
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+  const dispatch = useAppDispatch();
+  const [signup] = useSignupMutation();
+
+  const onFinish = (values: UserRegister) => {
+    signup(values)
+    .unwrap()
+    .then((data) => {
+      message.success(data?.message);
+      if(data.data){
+        dispatch(setToken(data.data.access_token));
+        dispatch(setUser(data.data.user));
+      }
+    })
+    .catch((e) => {
+      message.error(e.data?.message);
+    });
   };
 
   return (
     <>
-      <Form
+      <Form<UserRegister>
         form={form}
         name="register"
         onFinish={onFinish}
@@ -72,7 +89,7 @@ const SignUpForm: React.FC = () => {
         </Form.Item>
 
         <Form.Item
-          name="confirmpassword"
+          name="password2"
           dependencies={['password']}
           hasFeedback
           rules={[
