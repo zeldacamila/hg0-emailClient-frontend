@@ -6,7 +6,7 @@ import LogIn from './pages/LogIn';
 import Mail from './pages/Mail';
 import { useAppSelector } from './hooks';
 import { useValidateTokenMutation } from './features/auth/authAPI';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { removeUser } from './features/auth/userSlice';
 import { ResponseType } from './types/common';
 import { useAppDispatch } from './hooks';

@@ -25,7 +25,7 @@ const mailApi = createApi({
                 method: 'GET',
             }),
         }),
-        mailById: builder.query<ResponseType<Mail>, string>({
+        mailById: builder.query<ResponseType<Mail>, number>({
             query: (id) => ({
                 url: `/detail/${id}/`,
                 method: 'GET',
