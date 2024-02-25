@@ -75,3 +75,10 @@
 .read-the-docs {
   color: #888;
 }
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+* {
+  scrollbar-width: thin;
+}

@@ -18,26 +18,42 @@ const MailContainer: FC = () => {
     const [renderType, setRenderType] = useState<ElementTypes>('mailInboxList');
     const [idMailDetail, setIdMailDetail] = useState<number>();
     const [refetch, setRefetch] = useState(false);
+    const [origin, setOrigin] = useState<'sent' | 'inbox'>('inbox');
 
     const render = {
         detail: (
           <MailDetail 
-            onBack={() => {
+            onBack={(to) => {
+              setRenderType(to as ElementTypes)
+              setSelectedMenuItem([to === 'mailInboxList' ? '2' : '3'])
               setIdMailDetail(undefined)
-              setSelectedMenuItem(['2'])
             }} 
-            id={idMailDetail} 
+            id={idMailDetail}
+            from={origin} 
           />
         ),
-        mailInboxList: <MailInboxList onClickDetail={(id) => setIdMailDetail(id)} />,
-        mailSentList: <MailSentList isRefetch={refetch} setIsRefetch={setRefetch} onClickDetail={(id) => setIdMailDetail(id)} />,
+        mailInboxList: (
+          <MailInboxList 
+            onClickDetail={(id, to) => {
+              setIdMailDetail(id)
+              setOrigin(to)
+            }} 
+          />
+          ),
+        mailSentList: (
+          <MailSentList 
+            isRefetch={refetch} 
+            setIsRefetch={setRefetch} 
+            onClickDetail={(id, to) => {
+              setIdMailDetail(id)
+              setOrigin(to)
+            }}
+           />
+          ),
     }
     useEffect(() => { 
         if(idMailDetail){
             setRenderType('detail')
-        }else{
-            setRenderType('mailInboxList')
-            setSelectedMenuItem(['2'])
         }
     }, [idMailDetail])
     console.log(idMailDetail)
