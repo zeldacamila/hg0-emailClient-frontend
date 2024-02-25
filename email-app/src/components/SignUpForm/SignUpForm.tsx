@@ -58,7 +58,12 @@ const SignUpForm: React.FC = () => {
             },
           ]}
         >
-          <Input placeholder="Username" />
+          <Input
+            placeholder="Username"
+            onChange={(value) =>
+              form.setFieldValue('email', value.target.value)
+            }
+          />
         </Form.Item>
         <Form.Item
           name="email"
@@ -69,7 +74,7 @@ const SignUpForm: React.FC = () => {
             },
           ]}
         >
-          <Input placeholder="Email" suffix="@awesomemail.com" />
+          <Input placeholder="Email" suffix="@awesomemail.com" disabled />
         </Form.Item>
         <Form.Item
           name="password"

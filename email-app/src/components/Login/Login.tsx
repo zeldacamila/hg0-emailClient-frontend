@@ -14,6 +14,7 @@ const Login: React.FC = () => {
 
   const onFinish = (values: UserSignin) => {
     console.log('Received values of form: ', values);
+
     signin(values)
       .unwrap()
       .then((data) => {
@@ -40,7 +41,7 @@ const Login: React.FC = () => {
           <h1>Login</h1>
         </Form.Item>
         <Form.Item
-          name="email"
+          name="username"
           rules={[
             {
               required: true,
