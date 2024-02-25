@@ -16,7 +16,6 @@ const SignUpForm: React.FC = () => {
       ...values,
       email: `${values.email}@awesomemail.com`,
     };
-    console.log(modifiedValues);
     signup(modifiedValues)
       .unwrap()
       .then((data) => {
