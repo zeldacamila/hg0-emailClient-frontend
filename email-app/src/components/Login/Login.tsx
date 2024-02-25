@@ -1,5 +1,7 @@
 import { Button, Form, Input } from 'antd';
+import { MailTwoTone } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import './Login.css';
 
 const Login: React.FC = () => {
   const [form] = Form.useForm();
@@ -36,35 +38,24 @@ const Login: React.FC = () => {
               required: true,
               message: 'Please input your password!',
             },
-            () => ({
-              validator(_, value) {
-                if (
-                  value &&
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\^$*.\[\]{}()?"!@#%&/\\,><':;|_~`]).{8,}$/.test(
-                    value,
-                  )
-                ) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error(
-                    'Password must contain a mix of upper and lowercase letters, numbers, and symbols, and be at least 8 characters.',
-                  ),
-                );
-              },
-            }),
           ]}
           hasFeedback
         >
           <Input.Password placeholder="Password" />
         </Form.Item>
-
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Sign up
+            Sign in
           </Button>
         </Form.Item>
-  
+        <Form.Item>
+          <div className="sign-up-link-container">
+            Don't have an account?{' '}
+            <Link to="/signup" className="sign-up-link">
+              Register now!
+            </Link>
+          </div>
+        </Form.Item>
       </Form>
     </>
   );
