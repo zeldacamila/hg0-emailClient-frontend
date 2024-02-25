@@ -5,6 +5,7 @@ import { UserRegister } from '../../types/user';
 import { useSignupMutation } from '../../features/auth/authAPI';
 import { useAppDispatch } from '../../hooks';
 import { setToken, setUser } from '../../features/auth/userSlice';
+
 const SignUpForm: React.FC = () => {
   const [form] = Form.useForm();
   const dispatch = useAppDispatch();
@@ -15,6 +16,7 @@ const SignUpForm: React.FC = () => {
       ...values,
       email: `${values.email}@awesomemail.com`,
     };
+    console.log(modifiedValues);
     signup(modifiedValues)
       .unwrap()
       .then((data) => {
@@ -25,7 +27,15 @@ const SignUpForm: React.FC = () => {
         }
       })
       .catch((e) => {
-        message.error(e.data?.message);
+        if (e.data?.message?.email) {
+          message.error(e.data.message.email[0]);
+        } else if (e.data?.message?.username) {
+          message.error(e.data.message.username[0]);
+        } else {
+          message.error(
+            'An unexpected error occurred. Please try again later.',
+          );
+        }
       });
   };
 
