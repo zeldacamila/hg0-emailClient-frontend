@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ResponseType } from '../../types/common';
 import { Mail } from '../../types/mail';
+import { RootState } from '../../store';
 const api_url = 'http://localhost:8000/';
 /**
  * An API slice that provides methods for interacting with the user endpoint.
@@ -11,7 +12,17 @@ const api_url = 'http://localhost:8000/';
  */
 const mailApi = createApi({
     reducerPath: 'mailApi',
-    baseQuery: fetchBaseQuery({ baseUrl: `${api_url}emails` }),
+    baseQuery: fetchBaseQuery({ baseUrl: `${api_url}emails`, prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).user.token
+
+    // If we have a token set in state, let's assume that we should be passing it.
+    if (token) {
+      headers.set('authorization', `Bearer ${token}`)
+    }
+
+    return headers
+  },
+ }),
     endpoints: (builder) => ({
         mailsBySender: builder.query<ResponseType<Mail[]>, string>({
             query: (email) => ({
