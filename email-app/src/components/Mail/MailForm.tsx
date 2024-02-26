@@ -4,6 +4,7 @@ import { Mail } from '../../types/mail';
 import { SendOutlined } from '@ant-design/icons';
 import { useCreateMailMutation } from '../../features/mail/mailAPI';
 import { useAppSelector } from '../../hooks'; 
+import { useForm } from 'antd/es/form/Form';
 
 const { Item } = Form;
 const { TextArea } = Input;
@@ -16,6 +17,7 @@ const MailForm: FC<MailFormProps> = ({
 }) => {
   const user = useAppSelector((state) => state.user.value);
   const [createMail, {isLoading}] = useCreateMailMutation();
+  const [form] = useForm<Mail>();
 
   const onSubmit = (values: Partial<Mail>) => {
     if(user){
@@ -30,6 +32,7 @@ const MailForm: FC<MailFormProps> = ({
         .then((d) => {
             message.success(d.message);
             setIsRefetch(prev => !prev)
+            form.resetFields();
         })
         .catch(() => {});
     };
@@ -37,6 +40,7 @@ const MailForm: FC<MailFormProps> = ({
   return (
     <Form<Mail> 
         onFinish={onSubmit}
+        form={form}
     >
         <Item 
             name="recipient_email" 
@@ -44,7 +48,7 @@ const MailForm: FC<MailFormProps> = ({
         >
             <Input
                 prefix="To "
-                placeholder="email@email.com"
+                placeholder="email@awesomemail.com"
                 type='email'
                 autoCapitalize='none' 
                 required

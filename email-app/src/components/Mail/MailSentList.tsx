@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 const { Item } = List;
 
 type MailSentListProps = {
-    onClickDetail: (id: number) => void;
+    onClickDetail: (id: number, from: 'sent' | 'inbox') => void;
     isRefetch: boolean;
     setIsRefetch: Dispatch<SetStateAction<boolean>>;
 }
@@ -41,26 +41,32 @@ const MailSentList: FC<MailSentListProps> = ({
             dataSource={data?.data}
             loading={isLoading}
             locale={{emptyText: <Empty description="No mails" />}}
-            renderItem={(item) => (
-                <Item>
+            renderItem={({ id, subject, sender, timestamp }) => (
+                <Item
+                    style={{
+                        cursor: 'pointer',
+                        backgroundColor: 'white',
+                        padding: '10px',
+                        borderRadius: '5px',
+                    }}
+                    onClick={() => onClickDetail(id, 'sent')}
+                >
                     <Item.Meta
                         avatar={<Avatar style={{ backgroundColor: '#87d069' }} icon={<UserOutlined />} />}
-                        title={item.subject}
+                        title={subject}
                         description={
                             <Space size={15}>
-                                {item.sender.email}
-                                {dayjs(item.timestamp).format('DD-MM-YY')}
+                                {sender.email}
+                                {dayjs(timestamp).format('DD-MM-YY')}
                             </ Space>
                         }
-                        children='skdjsajkhd'
                     />
                     <Button 
                         icon={<EyeFilled />} 
                         type='dashed'
-                        onClick={() =>{console.log(item) 
-                            onClickDetail(item.id)}}
+                        onClick={() => onClickDetail(id, 'sent')}
                     >
-                        Read
+                        See
                     </Button>
                 </Item>
             )}

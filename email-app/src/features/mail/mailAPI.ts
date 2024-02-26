@@ -38,6 +38,12 @@ const mailApi = createApi({
                 body,
             }),
         }),
+        readMail: builder.mutation<ResponseType<Mail>, number>({
+            query: (id) => ({
+                url: `/status/read/${id}/`,
+                method: 'PUT',
+            }),
+        }),
     }),
 });
 
@@ -48,4 +54,5 @@ export const {
     useMailsByRecipientQuery,
     useMailByIdQuery,
     useCreateMailMutation,
+    useReadMailMutation,
 } = mailApi;
