@@ -34,7 +34,9 @@ const MailForm: FC<MailFormProps> = ({
             setIsRefetch(prev => !prev)
             form.resetFields();
         })
-        .catch(() => {});
+        .catch(() => {
+            message.error('Failed to send email. Please try again.');
+        });
     };
   }
   return (

@@ -13,7 +13,6 @@ const Login: React.FC = () => {
   const [signin] = useSigninMutation();
 
   const onFinish = (values: UserSignin) => {
-    console.log('Received values of form: ', values);
 
     signin(values)
       .unwrap()
