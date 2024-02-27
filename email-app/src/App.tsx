@@ -32,7 +32,7 @@ function App() {
     };
 
   }, [token]);
-  console.log(user,token)
+
   return (
     <>
       <div className="App">

@@ -56,7 +56,6 @@ const MailContainer: FC = () => {
             setRenderType('detail')
         }
     }, [idMailDetail])
-    console.log(idMailDetail)
 
     return (
     <Layout style={{height: '100vh'}}>
@@ -66,7 +65,6 @@ const MailContainer: FC = () => {
           <Menu
             mode="inline"
             defaultSelectedKeys={selectedMenuItem}
-            onChange={(e) => console.log(e)}
             style={{ height: '100%', borderRight: 0 }}
             items={[
                 { key: 1, icon: <EditFilled />, label: 'Compose', onClick: () => setOpenMailForm(true), dashed: true },
