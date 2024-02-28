@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ResponseType } from '../../types/common';
 import { Mail } from '../../types/mail';
 import { RootState } from '../../store';
-const api_url = 'http://localhost:8000/';
+const api_url = import.meta.env.VITE_REACT_APP_API_URL;
 /**
  * An API slice that provides methods for interacting with the user endpoint.
  * Containt the reducerPath, baseQuery, and endpoints.
@@ -11,59 +11,61 @@ const api_url = 'http://localhost:8000/';
  * endpoints: An object containing the endpoints for the API.
  */
 const mailApi = createApi({
-    reducerPath: 'mailApi',
-    baseQuery: fetchBaseQuery({ baseUrl: `${api_url}emails`, prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).user.token
+  reducerPath: 'mailApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${api_url}emails`,
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).user.token;
 
-    // If we have a token set in state, let's assume that we should be passing it.
-    if (token) {
-      headers.set('authorization', `Bearer ${token}`)
-    }
+      // If we have a token set in state, let's assume that we should be passing it.
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
 
-    return headers
-  },
- }),
-    endpoints: (builder) => ({
-        mailsBySender: builder.query<ResponseType<Mail[]>, string>({
-            query: (email) => ({
-                url: `/list/sender/${email}/`,
-                method: 'GET',
-            }),
-        }),
-        mailsByRecipient: builder.query<ResponseType<Mail[]>, string>({
-            query: (email) => ({
-                url: `/list/recipient/${email}/`,
-                method: 'GET',
-            }),
-        }),
-        mailById: builder.query<ResponseType<Mail>, number>({
-            query: (id) => ({
-                url: `/detail/${id}/`,
-                method: 'GET',
-            }),
-        }),
-        createMail: builder.mutation<ResponseType<Mail>, Partial<Mail>>({
-            query: (body) => ({
-                url: '/list/',
-                method: 'POST',
-                body,
-            }),
-        }),
-        readMail: builder.mutation<ResponseType<Mail>, number>({
-            query: (id) => ({
-                url: `/status/read/${id}/`,
-                method: 'PUT',
-            }),
-        }),
+      return headers;
+    },
+  }),
+  endpoints: (builder) => ({
+    mailsBySender: builder.query<ResponseType<Mail[]>, string>({
+      query: (email) => ({
+        url: `/list/sender/${email}/`,
+        method: 'GET',
+      }),
     }),
+    mailsByRecipient: builder.query<ResponseType<Mail[]>, string>({
+      query: (email) => ({
+        url: `/list/recipient/${email}/`,
+        method: 'GET',
+      }),
+    }),
+    mailById: builder.query<ResponseType<Mail>, number>({
+      query: (id) => ({
+        url: `/detail/${id}/`,
+        method: 'GET',
+      }),
+    }),
+    createMail: builder.mutation<ResponseType<Mail>, Partial<Mail>>({
+      query: (body) => ({
+        url: '/list/',
+        method: 'POST',
+        body,
+      }),
+    }),
+    readMail: builder.mutation<ResponseType<Mail>, number>({
+      query: (id) => ({
+        url: `/status/read/${id}/`,
+        method: 'PUT',
+      }),
+    }),
+  }),
 });
 
 export default mailApi;
 
 export const {
-    useMailsBySenderQuery,
-    useMailsByRecipientQuery,
-    useMailByIdQuery,
-    useCreateMailMutation,
-    useReadMailMutation,
+  useMailsBySenderQuery,
+  useMailsByRecipientQuery,
+  useMailByIdQuery,
+  useCreateMailMutation,
+  useReadMailMutation,
 } = mailApi;
