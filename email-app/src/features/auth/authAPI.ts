@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ResponseType } from '../../types/common';
 import type { DataSignin, UserSignin, UserRegister } from '../../types/user';
 
-const api_url = process.env.REACT_APP_API_URL;
+const api_url = import.meta.env.VITE_REACT_APP_API_URL;
 /**
  * An API slice that provides methods for interacting with the user endpoint.
  * Containt the reducerPath, baseQuery, and endpoints.
