@@ -19,7 +19,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
         run: |
-          docker build -t zeldacamila/email-app ./email-app
+          docker build -t zeldacamila/email-app ./email-app \
           --build-arg VITE_REACT_APP_API_URL=${{ secrets.API_URL }}
       - name: Publish image to docker hub
         run: docker push zeldacamila/email-app:latest
