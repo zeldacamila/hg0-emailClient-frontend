@@ -17,7 +17,7 @@ type MailInboxListProps = {
   onClickDetail: (id: number, from: 'sent' | 'inbox') => void;
 };
 
-/*
+/**
  * `MailInboxList` displays a list of emails received by the current user. It fetches the mail data
  * using the `useMailsByRecipientQuery` hook based on the user's email and provides a refresh functionality
  * to update the list. Each mail item can be clicked to view its details, handled by the `onClickDetail` callback.

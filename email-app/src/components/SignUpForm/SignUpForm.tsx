@@ -6,7 +6,7 @@ import { useSignupMutation } from '../../features/auth/authAPI';
 import { useAppDispatch } from '../../hooks';
 import { setToken, setUser } from '../../features/auth/userSlice';
 
-/*
+/**
  * `SignUpForm` provides a user interface for new users to create an account. It collects user information
  * including username, email (automatically appending "@awesomemail.com" to the provided username), and password.
  * Upon successful registration, it uses the `useSignupMutation` hook to send the user's data to the backend,
