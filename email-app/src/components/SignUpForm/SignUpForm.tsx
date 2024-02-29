@@ -6,6 +6,24 @@ import { useSignupMutation } from '../../features/auth/authAPI';
 import { useAppDispatch } from '../../hooks';
 import { setToken, setUser } from '../../features/auth/userSlice';
 
+/*
+ * `SignUpForm` provides a user interface for new users to create an account. It collects user information
+ * including username, email (automatically appending "@awesomemail.com" to the provided username), and password.
+ * Upon successful registration, it uses the `useSignupMutation` hook to send the user's data to the backend,
+ * displays a success message, and updates the global state with the user's token and details.
+ *
+ * The form enforces specific validation rules for the password, requiring a mix of upper and lower case letters,
+ * numbers, and symbols, and must be at least 8 characters long. It also includes a field for confirming the password,
+ * ensuring that the user accurately types their intended password.
+ *
+ * In case of any errors during the signup process (username already taken, email already registered),
+ * it displays an appropriate error message. If the error is not specifically related to the email or username,
+ * a generic error message prompts the user to try again later.
+ *
+ * The component uses Ant Design's `Form`, `Input`, and `Button` components for a cohesive and accessible user interface.
+ * It also provides a link for users who already have an account to navigate to the login page.
+ *
+ */
 const SignUpForm: React.FC = () => {
   const [form] = Form.useForm();
   const dispatch = useAppDispatch();

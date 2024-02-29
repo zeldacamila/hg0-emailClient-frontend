@@ -16,6 +16,17 @@ const { Item } = List;
 type MailInboxListProps = {
   onClickDetail: (id: number, from: 'sent' | 'inbox') => void;
 };
+
+/*
+ * `MailInboxList` displays a list of emails received by the current user. It fetches the mail data
+ * using the `useMailsByRecipientQuery` hook based on the user's email and provides a refresh functionality
+ * to update the list. Each mail item can be clicked to view its details, handled by the `onClickDetail` callback.
+ *
+ * This component uses Ant Design's `List`, `Avatar`, `Button`, `Row`, and `Space` components to render
+ * the inbox list in a user-friendly manner. It shows a "Refresh" button to allow users to manually update
+ * the list of emails. Unread emails are highlighted, and the list displays a message when no mails are available.
+ *
+ */
 const MailInboxList: FC<MailInboxListProps> = ({ onClickDetail }) => {
   const user = useAppSelector((state) => state.user.value);
   const { data, isLoading, refetch } = useMailsByRecipientQuery(
