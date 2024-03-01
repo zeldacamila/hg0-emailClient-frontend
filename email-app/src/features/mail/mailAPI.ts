@@ -26,6 +26,18 @@ const mailApi = createApi({
     },
   }),
   endpoints: (builder) => ({
+    allMails: builder.query<ResponseType<Mail[]>, string>({
+      query: (subject) => ({
+        url: `/list/all/?subject=${subject}`,
+        method: 'GET',
+      }),
+    }),
+    mailsByFolder: builder.query<ResponseType<Mail[]>, string>({
+      query: (folder) => ({
+        url: `/folders/${folder}/`,
+        method: 'GET',
+      }),
+    }),
     mailsBySender: builder.query<ResponseType<Mail[]>, string>({
       query: (email) => ({
         url: `/list/sender/${email}/`,
@@ -38,15 +50,21 @@ const mailApi = createApi({
         method: 'GET',
       }),
     }),
-    mailById: builder.query<ResponseType<Mail>, number>({
+    mailById: builder.query<ResponseType<Mail>, string>({
       query: (id) => ({
         url: `/detail/${id}/`,
         method: 'GET',
       }),
     }),
+    deleteMail: builder.mutation<ResponseType<null>, number>({
+      query: (id) => ({
+        url: `/detail/${id}/`,
+        method: 'DELETE',
+      }),
+    }),
     createMail: builder.mutation<ResponseType<Mail>, Partial<Mail>>({
       query: (body) => ({
-        url: '/list/',
+        url: '/list/create/',
         method: 'POST',
         body,
       }),
@@ -55,6 +73,13 @@ const mailApi = createApi({
       query: (id) => ({
         url: `/status/read/${id}/`,
         method: 'PUT',
+      }),
+    }),
+    addEmailToFolder: builder.mutation<ResponseType<Mail>, { email: number; folder: string }>({
+      query: (body) => ({
+        url: `/folders/`,
+        method: 'POST',
+        body,
       }),
     }),
   }),
@@ -68,4 +93,8 @@ export const {
   useMailByIdQuery,
   useCreateMailMutation,
   useReadMailMutation,
+  useDeleteMailMutation,
+  useAllMailsQuery,
+  useAddEmailToFolderMutation,
+  useMailsByFolderQuery,
 } = mailApi;

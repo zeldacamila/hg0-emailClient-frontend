@@ -1,15 +1,12 @@
 import { Dispatch, FC, SetStateAction, useEffect } from 'react';
 import { useMailsBySenderQuery } from '../../features/mail/mailAPI';
 import { useAppSelector } from '../../hooks';
-import { Avatar, Button, Empty, List, Space } from 'antd';
-import { EyeFilled, SendOutlined, UserOutlined } from '@ant-design/icons';
+import { Empty, List, Space } from 'antd';
+import {  SendOutlined } from '@ant-design/icons';
 import { Mail } from '../../types/mail';
-import dayjs from 'dayjs';
-
-const { Item } = List;
+import MailItem from './MailItem';
 
 type MailSentListProps = {
-  onClickDetail: (id: number, from: 'sent' | 'inbox') => void;
   isRefetch: boolean;
   setIsRefetch: Dispatch<SetStateAction<boolean>>;
 };
@@ -19,8 +16,6 @@ type MailSentListProps = {
  * using the `useMailsBySenderQuery` hook, based on the user's email address. This component allows users to
  * navigate to the detail view of a specific mail item and supports manual refresh to update the list of sent emails.
  *
- * @param onClickDetail - Function called with the ID and origin ('sent') of the mail item when an item is clicked,
- *                        facilitating navigation to the mail's detail view.
  * @param isRefetch - Boolean state indicating if a refetch of the mail list is requested.
  * @param setIsRefetch - Function to update the `isRefetch` state, used to control the refresh mechanism.
  *
@@ -36,7 +31,6 @@ type MailSentListProps = {
  * on demand. This is particularly useful for ensuring that the list reflects the latest changes after sending new emails.
  */
 const MailSentList: FC<MailSentListProps> = ({
-  onClickDetail,
   isRefetch,
   setIsRefetch,
 }) => {
@@ -66,39 +60,11 @@ const MailSentList: FC<MailSentListProps> = ({
       dataSource={data?.data}
       loading={isLoading}
       locale={{ emptyText: <Empty description="No mails" /> }}
-      renderItem={({ id, subject, sender, timestamp }) => (
-        <Item
-          style={{
-            cursor: 'pointer',
-            backgroundColor: 'white',
-            padding: '10px',
-            borderRadius: '5px',
-          }}
-          onClick={() => onClickDetail(id, 'sent')}
-        >
-          <Item.Meta
-            avatar={
-              <Avatar
-                style={{ backgroundColor: '#87d069' }}
-                icon={<UserOutlined />}
-              />
-            }
-            title={subject}
-            description={
-              <Space size={15}>
-                {sender.email}
-                {dayjs(timestamp).format('DD-MM-YY')}
-              </Space>
-            }
-          />
-          <Button
-            icon={<EyeFilled />}
-            type="dashed"
-            onClick={() => onClickDetail(id, 'sent')}
-          >
-            See
-          </Button>
-        </Item>
+      renderItem={(mail) => (
+        <MailItem
+          mail={mail}
+          refetch={refetch}
+        />
       )}
     />
   );

@@ -1,15 +1,22 @@
 import { FC, useEffect, useState } from 'react';
-import { EditFilled, InboxOutlined, SendOutlined } from '@ant-design/icons';
-import { MenuProps, Modal } from 'antd';
+import { EditFilled, FolderOutlined, InboxOutlined, MedicineBoxOutlined, SendOutlined } from '@ant-design/icons';
+import { FloatButton, Modal } from 'antd';
 import { Layout, Menu } from 'antd';
-import Header from '../Header';
+import Header from '../Header/Header';
 import MailForm from './MailForm';
 import MailDetail from './MailDetail';
 import MailInboxList from './MailInboxList';
 import MailSentList from './MailSentList';
+import { useAllFolderQuery } from '../../features/folder/folderAPI';
+import MailGenericList from './MailGenericList';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setFolder } from '../../features/folder/folderSlice';
+import { removeMail } from '../../features/mail/mailSlice';
+import FolderForm from '../Folder/FolderForm';
+import MailFilterList from './MailFilterList';
 
 const { Content, Sider } = Layout;
-type ElementTypes = 'mailInboxList' | 'detail' | 'mailSentList';
+type ElementTypes = 'mailInboxList' | 'detail' | 'mailSentList' | 'mailGeneralList';
 
 /**
  * `MailContainer` is a component that serves as the primary container for the mail-related functionalities
@@ -24,61 +31,68 @@ type ElementTypes = 'mailInboxList' | 'detail' | 'mailSentList';
  * - The collapsed state of the side navigation (`Sider`).
  * - The visibility of the mail composition form (`Modal`).
  * - The currently selected menu item to highlight the active view.
- * - The type of content to render (`mailInboxList`, `detail`, or `mailSentList`).
+ * - The type of content to render (`mailInboxList`, `detail`, `mailSentList` or `mailGeneralList`).
  * - The ID of the mail item to display in detail view.
  * - A flag to trigger refetching of mail lists.
- * - The origin (`sent` or `inbox`) of the mail item currently being viewed in detail.
+ * - The origin (`sent` or `inbox` or `other`) of the mail item currently being viewed in detail.
  *
  * This dynamic rendering is managed through state hooks and conditional rendering based on the current
  * state values.
  */
 const MailContainer: FC = () => {
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   const [openMailForm, setOpenMailForm] = useState(false);
-  const [selectedMenuItem, setSelectedMenuItem] = useState<
-    MenuProps['selectedKeys']
-  >(['2']);
+  const [openFolderForm, setOpenFolderForm] = useState(false);
+  const [selectedMenuItem, setSelectedMenuItem] = useState<string[]>(['inbox']);
   const [renderType, setRenderType] = useState<ElementTypes>('mailInboxList');
-  const [idMailDetail, setIdMailDetail] = useState<number>();
   const [refetch, setRefetch] = useState(false);
-  const [origin, setOrigin] = useState<'sent' | 'inbox'>('inbox');
-
+  const {data, refetch: refetchFolders} = useAllFolderQuery();
+  const dispatch = useAppDispatch();
+  const mailDetail = useAppSelector((state) => state.mail.value);
+  const folder = useAppSelector((state) => state.folder.value);
   const render = {
     detail: (
-      <MailDetail
-        onBack={(to) => {
-          setRenderType(to as ElementTypes);
-          setSelectedMenuItem([to === 'mailInboxList' ? '2' : '3']);
-          setIdMailDetail(undefined);
-        }}
-        id={idMailDetail}
-        from={origin}
-      />
+      <MailDetail folders={data?.data} />
     ),
     mailInboxList: (
-      <MailInboxList
-        onClickDetail={(id, to) => {
-          setIdMailDetail(id);
-          setOrigin(to);
-        }}
-      />
+      <MailInboxList />
     ),
     mailSentList: (
       <MailSentList
         isRefetch={refetch}
         setIsRefetch={setRefetch}
-        onClickDetail={(id, to) => {
-          setIdMailDetail(id);
-          setOrigin(to);
-        }}
       />
     ),
+    mailGeneralList: <MailGenericList refetch={refetchFolders} />
   };
   useEffect(() => {
-    if (idMailDetail) {
+    if (!mailDetail) {
+      if (folder === 'inbox') {
+        setRenderType('mailInboxList');
+        setSelectedMenuItem(['inbox']);
+      } else if (folder === 'sent') {
+        setRenderType('mailSentList');
+        setSelectedMenuItem(['sent']);
+      } else {
+        setRenderType('mailGeneralList');
+      }
+    } else {
       setRenderType('detail');
+
     }
-  }, [idMailDetail]);
+  }, [mailDetail, folder]);
+
+  useEffect(() => {
+    if(selectedMenuItem[0] === 'inbox'){
+      setRenderType('mailInboxList');
+    } else if(selectedMenuItem[0] === 'sent'){
+      setRenderType('mailSentList');
+    } else {
+      setRenderType('mailGeneralList');
+    }
+    dispatch(removeMail());
+
+  }, [selectedMenuItem]);
 
   return (
     <Layout style={{ height: '100vh' }}>
@@ -93,28 +107,39 @@ const MailContainer: FC = () => {
           <Menu
             mode="inline"
             defaultSelectedKeys={selectedMenuItem}
-            style={{ height: '100%', borderRight: 0 }}
+            style={{ height: '100%', borderRight: 0}}
             items={[
               {
-                key: 1,
-                icon: <EditFilled />,
-                label: 'Compose',
-                onClick: () => setOpenMailForm(true),
-                dashed: true,
-              },
-              {
-                key: 2,
+                key: 'inbox',
                 icon: <InboxOutlined />,
                 label: 'Inbox',
-                onClick: () => setRenderType('mailInboxList'),
+                onClick: () => {
+                  setRenderType('mailInboxList')
+                  dispatch(removeMail());
+                  dispatch(setFolder({value: 'inbox'}))
+                },
               },
               {
-                key: 3,
+                key: 'sent',
                 icon: <SendOutlined />,
                 label: 'Sent',
-                onClick: () => setRenderType('mailSentList'),
+                onClick: () => {
+                  setRenderType('mailSentList')
+                  dispatch(removeMail());
+                  dispatch(setFolder({value: 'sent'}))
+                },
               },
-            ]}
+              ...(data?.data?.map((folder) => ({
+                icon: <FolderOutlined />,
+                key: folder.id.toString(),
+                label: folder.name,
+                onClick: () => {
+                  setRenderType('mailGeneralList')
+                  dispatch(removeMail());
+                  dispatch(setFolder({value: folder.id.toString(), folder}));
+                },
+              })) || [])
+            ].filter(Boolean)}
           />
         </Sider>
         <Layout style={{ padding: '0 24px 24px' }}>
@@ -122,7 +147,6 @@ const MailContainer: FC = () => {
             {render[renderType]}
             <Modal
               onCancel={() => {
-                setSelectedMenuItem(['2']);
                 setOpenMailForm(false);
               }}
               open={openMailForm}
@@ -131,7 +155,28 @@ const MailContainer: FC = () => {
             >
               <MailForm setIsRefetch={setRefetch} />
             </Modal>
+            <Modal
+              onCancel={() => setOpenFolderForm(false)}
+              open={openFolderForm}
+              title="New Folder"
+              footer={null}
+            >
+              <FolderForm refetch={refetchFolders} />
+            </Modal>
           </Content>
+          <FloatButton.Group shape="circle" style={{ right: 24 }}>
+            <FloatButton
+                tooltip="New Message"
+                icon={<EditFilled />} 
+                onClick={() => setOpenMailForm(true)} 
+            />
+            <FloatButton
+                tooltip="New Folder"
+                icon={<MedicineBoxOutlined />} 
+                onClick={() => setOpenFolderForm(true)} 
+            />
+          </FloatButton.Group>
+          <MailFilterList />
         </Layout>
       </Layout>
     </Layout>

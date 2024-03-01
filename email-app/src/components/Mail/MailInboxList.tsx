@@ -1,21 +1,14 @@
 import { FC } from 'react';
 import { useMailsByRecipientQuery } from '../../features/mail/mailAPI';
 import { useAppSelector } from '../../hooks';
-import { Avatar, Button, Empty, List, Row, Space } from 'antd';
+import { Button, Empty, List, Row, Space } from 'antd';
 import {
-  EyeFilled,
   ReloadOutlined,
   SendOutlined,
-  UserOutlined,
 } from '@ant-design/icons';
 import { Mail } from '../../types/mail';
-import dayjs from 'dayjs';
+import MailItem from './MailItem';
 
-const { Item } = List;
-
-type MailInboxListProps = {
-  onClickDetail: (id: number, from: 'sent' | 'inbox') => void;
-};
 
 /**
  * `MailInboxList` displays a list of emails received by the current user. It fetches the mail data
@@ -27,7 +20,7 @@ type MailInboxListProps = {
  * the list of emails. Unread emails are highlighted, and the list displays a message when no mails are available.
  *
  */
-const MailInboxList: FC<MailInboxListProps> = ({ onClickDetail }) => {
+const MailInboxList: FC = () => {
   const user = useAppSelector((state) => state.user.value);
   const { data, isLoading, refetch } = useMailsByRecipientQuery(
     user?.email || '',
@@ -51,42 +44,16 @@ const MailInboxList: FC<MailInboxListProps> = ({ onClickDetail }) => {
           />
         </Row>
       }
+      style={{ overflow: 'auto', height: '100%' }}
       dataSource={data?.data}
       loading={isLoading}
       locale={{ emptyText: <Empty description="No mails" /> }}
-      renderItem={({ id, status, subject, sender, timestamp }) => (
-        <Item
-          style={{
-            cursor: 'pointer',
-            backgroundColor: status ? '#f0f2f3' : 'white',
-            padding: '10px',
-            borderRadius: '5px',
-          }}
-          onClick={() => onClickDetail(id, 'inbox')}
-        >
-          <Item.Meta
-            avatar={
-              <Avatar
-                style={{ backgroundColor: status ? 'green' : 'gray' }}
-                icon={<UserOutlined />}
-              />
-            }
-            title={subject}
-            description={
-              <Space size={15}>
-                {sender.email}
-                {dayjs(timestamp).format('DD-MM-YY')}
-              </Space>
-            }
-          />
-          <Button
-            icon={<EyeFilled />}
-            type="dashed"
-            onClick={() => onClickDetail(id, 'inbox')}
-          >
-            See
-          </Button>
-        </Item>
+      renderItem={(mail) => (
+        <MailItem
+          mail={mail}
+          refetch={refetch}
+          folder="inbox"
+        />
       )}
     />
   );

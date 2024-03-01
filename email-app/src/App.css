@@ -82,3 +82,8 @@
 * {
   scrollbar-width: thin;
 }
+
+.mail-item:hover {
+  background-color: #f4f6f8 !important;
+
+}
