@@ -52,7 +52,6 @@ const MailInboxList: FC = () => {
         <MailItem
           mail={mail}
           refetch={refetch}
-          folder="inbox"
         />
       )}
     />

@@ -53,7 +53,7 @@ const MailDetail: FC<MailDetailProps> = ({ folders }) => {
             .then(() => {
                 message.success('Email added to folder successfully');
             })
-            .catch((e) => {
+            .catch(() => {
                 message.error("Failed to add email to folder. Probably it's already there.");
             });
     },
