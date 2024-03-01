@@ -22,11 +22,13 @@ const { Header } = Layout;
  * The header is styled to display its contents flexibly aligned to the end, and it
  * adapts the dark theme from Ant Design for the `Menu`.
  */
+
 const HeaderComponent: FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.value)?.username;
+
   return (
-    <Header style={{ display: 'flex', alignItems: 'flex-end' }}>
+    <Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Menu
         theme="dark"
         mode="horizontal"
@@ -37,7 +39,7 @@ const HeaderComponent: FC = () => {
             label: <span>Welcome {user || ''} </span>,
           },
           {
-            key: 1,
+            key: 3,
             label: (
               <Dropdown
                 menu={{

@@ -14,6 +14,9 @@ REGISTER
 import userApi from './features/auth/authAPI';
 import userReducer from './features/auth/userSlice';
 import mailApi from './features/mail/mailAPI';
+import mailReducer from './features/mail/mailSlice';
+import folderApi from './features/folder/folderAPI';
+import folderReducer from './features/folder/folderSlice';
 
 const persistConfig = {
     key: 'root',
@@ -25,8 +28,11 @@ const persistConfig = {
  */
 const rootReducer = combineReducers({
     user: userReducer,
+    mail: mailReducer,
+    folder: folderReducer,
     [userApi.reducerPath]: userApi.reducer,
     [mailApi.reducerPath]: mailApi.reducer,
+    [folderApi.reducerPath]: folderApi.reducer,
 });
 
 /**
@@ -45,7 +51,8 @@ export const store = configureStore({
         },
     })
     .concat(userApi.middleware)
-    .concat(mailApi.middleware),
+    .concat(mailApi.middleware)
+    .concat(folderApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>
