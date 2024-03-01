@@ -1,9 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-import NotFound from './pages/NotFound';
+import NotFound from './pages/NotFound/NotFound';
 import SignUp from './pages/SignUp/SignUp';
 import LogIn from './pages/Login/LogIn';
-import Mail from './pages/Mail';
+import Mail from './pages/Mail/Mail';
 import { useAppSelector } from './hooks';
 import { useValidateTokenMutation } from './features/auth/authAPI';
 import { useEffect } from 'react';
@@ -24,13 +24,12 @@ function App() {
         .then((data: ResponseType<null>) => {
           if (!data.success) {
             dispatch(removeUser());
-          } 
+          }
         })
         .catch(() => {
           dispatch(removeUser());
         });
-    };
-
+    }
   }, [token]);
 
   return (
@@ -38,9 +37,18 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/login" element={ user ? <Navigate to="/mail" /> : <LogIn />} />
-          <Route path="/signup" element={user ? <Navigate to="/mail" /> : <SignUp />} />
-          <Route path="/mail" element={ !user ? <Navigate to="/login" /> : <Mail />} />
+          <Route
+            path="/login"
+            element={user ? <Navigate to="/mail" /> : <LogIn />}
+          />
+          <Route
+            path="/signup"
+            element={user ? <Navigate to="/mail" /> : <SignUp />}
+          />
+          <Route
+            path="/mail"
+            element={!user ? <Navigate to="/login" /> : <Mail />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
