@@ -65,7 +65,7 @@ const Login: React.FC = () => {
           <Input
             prefix={<UserOutlined />}
             placeholder="Email"
-            suffix="@awesomemail.com"
+            suffix="@awesomemailbox.net"
           />
         </Form.Item>
         <Form.Item

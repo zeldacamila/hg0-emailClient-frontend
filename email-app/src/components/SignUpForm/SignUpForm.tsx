@@ -32,7 +32,7 @@ const SignUpForm: React.FC = () => {
   const onFinish = (values: UserRegister) => {
     const modifiedValues = {
       ...values,
-      email: `${values.email}@awesomemail.com`,
+      email: `${values.email}@awesomemailbox.net`,
     };
     signup(modifiedValues)
       .unwrap()
@@ -92,7 +92,7 @@ const SignUpForm: React.FC = () => {
             },
           ]}
         >
-          <Input placeholder="Email" suffix="@awesomemail.com" disabled />
+          <Input placeholder="Email" suffix="@awesomemailbox.net" disabled />
         </Form.Item>
         <Form.Item
           name="password"

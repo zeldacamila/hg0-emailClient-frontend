@@ -14,9 +14,9 @@ type FolderFormProps = {
 
 /**
  * FolderForm is a functional component that renders a form for composing and sending emails.
- * 
+ *
  * @param refetch - A function to trigger refetching of folder lists to reflect the newly sent email.
- * 
+ *
  */
 
 const FolderForm: FC<FolderFormProps> = ({ refetch }) => {
@@ -30,7 +30,7 @@ const FolderForm: FC<FolderFormProps> = ({ refetch }) => {
         .unwrap()
         .then((d) => {
           message.success(d.message);
-          refetch()
+          refetch();
           form.resetFields();
         })
         .catch(() => {
@@ -39,21 +39,9 @@ const FolderForm: FC<FolderFormProps> = ({ refetch }) => {
     }
   };
   return (
-    <Form<Folder> 
-        onFinish={onSubmit} 
-        form={form}
-        layout='vertical'
-    >
-      <Item 
-        label="Folder Name"
-        name="name" 
-        required
-      >
-        <Input
-          placeholder="Folder Name"
-          autoCapitalize="none"
-          required
-        />
+    <Form<Folder> onFinish={onSubmit} form={form} layout="vertical">
+      <Item label="Folder Name" name="name" required>
+        <Input placeholder="Folder Name" autoCapitalize="none" required />
       </Item>
       <Row justify="end">
         <Button
@@ -62,7 +50,7 @@ const FolderForm: FC<FolderFormProps> = ({ refetch }) => {
           icon={<SendOutlined />}
           loading={isLoading}
         >
-          Send
+          Create
         </Button>
       </Row>
     </Form>
