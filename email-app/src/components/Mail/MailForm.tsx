@@ -57,7 +57,7 @@ const MailForm: FC<MailFormProps> = ({ setIsRefetch }) => {
       <Item name="recipient_email" required>
         <Input
           prefix="To "
-          placeholder="email@awesomemail.com"
+          placeholder="@awesomemailbox.net"
           type="email"
           autoCapitalize="none"
           required

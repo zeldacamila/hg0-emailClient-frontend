@@ -50,6 +50,8 @@ const MailContainer: FC = () => {
   const dispatch = useAppDispatch();
   const mailDetail = useAppSelector((state) => state.mail.value);
   const folder = useAppSelector((state) => state.folder.value);
+  const user = useAppSelector((state) => state.user.value);
+
   const render = {
     detail: (
       <MailDetail folders={data?.data} />
@@ -93,6 +95,10 @@ const MailContainer: FC = () => {
     dispatch(removeMail());
 
   }, [selectedMenuItem]);
+
+  useEffect(() => {
+      refetchFolders();
+  }, [user]);
 
   return (
     <Layout style={{ height: '100vh' }}>
