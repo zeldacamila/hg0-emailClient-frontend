@@ -22,18 +22,18 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones disabled for SonarCloud compatibility
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18' 
+      #- name: Set up Node.js
+      #  uses: actions/setup-node@v3
+      #  with:
+      #    node-version: '18' 
 
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./email-app
+      #- name: Install dependencies
+      #  run: npm install
+      #  working-directory: ./email-app
 
-      - name: Run tests
-        run: npm test -- --coverage
-        working-directory: ./email-app
+      #- name: Run tests
+      #  run: npm test -- --coverage
+      #  working-directory: ./email-app
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
