@@ -5,7 +5,7 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 # Install dependencies
-RUN npm install
+RUN npm install --ignore-scripts
 # Copy the entire application code to the container
 COPY . .
 # Define build-time environment variables
