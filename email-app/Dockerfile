@@ -1,5 +1,5 @@
 # Use the official Node.js runtime as the base image
-FROM node:18 as build
+FROM node:18 AS build
 # Set the working directory in the container
 WORKDIR /app
 # Copy package.json and package-lock.json to the working directory

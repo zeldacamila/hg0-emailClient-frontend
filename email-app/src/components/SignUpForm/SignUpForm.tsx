@@ -57,7 +57,6 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <>
       <Form<UserRegister>
         form={form}
         name="register"
@@ -105,7 +104,7 @@ const SignUpForm: React.FC = () => {
               validator(_, value) {
                 if (
                   value &&
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\^$*.\[\]{}()?"!@#%&/\\,><':;|_~`]).{8,}$/.test(
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^$*.[\]{}()?!"@#%&/,><':;|_~]).{8,}$/.test(
                     value,
                   )
                 ) {
@@ -161,7 +160,6 @@ const SignUpForm: React.FC = () => {
           </div>
         </Form.Item>
       </Form>
-    </>
   );
 };
 
