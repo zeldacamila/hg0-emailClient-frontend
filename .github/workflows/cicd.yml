@@ -19,18 +19,31 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
         run: |
-          docker build -t zeldacamila/email-app ./email-app \
+          docker build -t hellnah71/email-app ./email-app \
           --build-arg VITE_REACT_APP_API_URL=${{ secrets.API_URL }}
       - name: Publish image to docker hub
-        run: docker push zeldacamila/email-app:latest
+        run: docker push hellnah71/email-app:latest
 
   deploy:
     needs: build
-    runs-on: aws-ec2
+    runs-on: ubuntu-latest
     steps:
-      - name: Pull image from docker hub
-        run: docker pull zeldacamila/email-app:latest
-      - name: Delete Old Container
-        run: docker rm -f frontendContainer
-      - name: Run docker container
-        run: docker run -d -p 80:80 --name frontendContainer zeldacamila/email-app:latest
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH connection
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+      - name: Deploy on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no -l ubuntu  ec2-54-204-113-27.compute-1.amazonaws.com <<EOF
+          sudo docker pull hellnah71/email-app:latest
+          sudo docker rm -f frontendContainer
+          ./detener_contenedor_front.sh
+          sudo docker run -d -p 80:80 --name frontendContainer hellnah71/email-app:latest
+          sudo docker container prune -f
+          sudo docker image prune -a -f
+          EOF
+
+# EOF is used to end the ssh command

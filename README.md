@@ -7,6 +7,8 @@
 1. On **email-app/Dockerfile**
     > **Replace 'as' with an uppercase format `AS`.**
     -    >This change was made because using uppercase in instructions enhances readability and clarity, especially during collaborations within development teams. Change date: ***17/03/2024***
+    > **This line added --ignore-scripts to the RUN npm install command.**
+    -    >this change was made so that npm will install the project dependencies, but will not run any scripts defined in the package.json file. Change date: ***17/03/2024***
 2.  On **email-app/src/App.tsx**
     >   **Consolidated multiple calls to `./hooks` into a single line.**
     -   >This change was made because importing the same module multiple times affects code readability and maintainability. Change date: ***17/03/2024***
