@@ -26,11 +26,18 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ip-172-31-16-10
+    runs-on: ubuntu-latest
     steps:
-      - name: Pull image from docker hub
-        run: docker pull hellnah71/email-app:latest
-      - name: Delete Old Container
-        run: docker rm -f frontendContainer
-      - name: Run docker container
-        run: docker run -d -p 80:80 --name frontendContainer hellnah71/email-app:latest
+      - name: Set up SSH connection
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+      - name: Deploy on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no -l ubuntu  ec2-54-204-113-27.compute-1.amazonaws.com <<EOF
+          docker pull hellnah71/email-app:latest
+          docker rm -f frontendContainer
+          docker run -d -p 80:80 --name frontendContainer hellnah71/email-app:latest
+          docker container prune -f
+          docker image prune -a -f
+          EOF
