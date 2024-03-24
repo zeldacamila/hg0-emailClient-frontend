@@ -78,6 +78,14 @@ As mentioned earlier, each component has its documentation. However, if you look
 ![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/7370cda2-14bd-4b2d-8506-6f7905c3d5af)
 ![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/aaf033df-15b7-45f1-8661-c871e6c0b6da)
 
+## How to run the Storybook
+
+1. Run Storybook:
+```bash
+npm run storybook
+```
+
+This will start Storybook and open your default browser to the Storybook page, where you can view and interact with the components.
 
 
 ### Feature 3 -> Automated Static code review and test coverage with SonarCloud
