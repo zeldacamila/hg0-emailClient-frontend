@@ -68,7 +68,21 @@ In the HG-0 project, they had dependencies of Babel installed to use Jest for un
 > Docs:
 In this feature, Storybook was implemented, which is a frontend tool that offers various capabilities such as testing, creating and testing components in isolation, and automatically documenting components, among other possibilities.</br>
 
+### Feature 3 -> Automated Static code review and test coverage with SonarCloud
+We implemented a CI workflow that checked the code on Push and Pull Request actions on GitHub.
 
+The overall analysis can be found at https://sonarcloud.io/summary/overall?id=Tech-Fellows-SnoopJake_hg0-emailClient-frontend
+
+On each commit, a SonarCloud badge can be seen, which analyzes how many quality problems were introduced due to that specific commit:
+
+![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/b5d4adf7-3f45-48ef-8376-f185401d87d5)
+![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/3f792f99-9ca4-4cb0-a7c3-46d73cc3fc7d)
+
+We **succesfully fixed all the vulnerabilities found initially**, **for the 1.8 lines of code analyzed!**
+
+![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/4285bcb7-7924-42e4-ab54-bd042e428cf9)
+
+Test coverage was implemented, but no tests exist so coverage is 0%!
 
 ///////////////////////////////////////////////////
 
