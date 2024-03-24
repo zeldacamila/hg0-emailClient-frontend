@@ -40,15 +40,6 @@ To better integrate our projects, we created a table on a Notion page. on which 
 
 ## New features
 
-
-### Feature 1 -> W3C Standards
-
-- Dont need changes
-
-### Feature 2 -> Storybook
-
--
-=======
 ### Feature 1 -> W3C Standards No Changes
  For this feature we checked the W3C standards to make sure that the page complies with the accessibility requirements, as this is something that all web pages should comply with and it works correctly. We performed several tests, which will be mentioned below along with their respective results:
 > Browser Compatibility:
@@ -78,7 +69,6 @@ Manually, all links and clickable parts of the page were tested to ensure they f
 
 ### Feature 2 -> Storybook
 In this feature, Storybook was implemented, which is a frontend tool that offers various capabilities such as testing, creating and testing components in isolation, and automatically documenting components, among other possibilities.</br>
->>>>>>> 63face2c4bf9ae3fbf3d62a21eb25b310e7a2494
 
 In the HG-0 project, they had dependencies of Babel installed to use Jest for unit testing. However, with the version `Storybook 8.0.4`  being used, there was a conflict with Babel. This was because earlier versions of Storybook used Babel. The issue was resolved by uninstalling the Babel dependencies and reinstalling Jest without them, as an addon of Storybook. This approach worked as expected.
 
@@ -124,7 +114,6 @@ We **succesfully fixed all the vulnerabilities found initially**, **for the 1.8 
 Test coverage was implemented, but no tests exist so coverage is 0%!
 
 ///////////////////////////////////////////////////
->>>>>>> 63face2c4bf9ae3fbf3d62a21eb25b310e7a2494
 
 # Email Client Project
 
