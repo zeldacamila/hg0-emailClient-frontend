@@ -1,0 +1,1 @@
+const e={parameters:{a11y:{element:"#storybook-root",config:{rules:[{id:"autocomplete-valid",selector:'*:not([autocomplete="nope"])'},{id:"image-alt",enabled:!1}]},options:{},manual:!0},controls:{matchers:{color:/(background|color)$/i,date:/Date$/i}}}};export{e as default,e as preview};

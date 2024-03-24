@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { EditFilled, FolderOutlined, InboxOutlined, MedicineBoxOutlined, SendOutlined } from '@ant-design/icons';
-import { FloatButton, Modal } from 'antd';
-import { Layout, Menu } from 'antd';
+import { FloatButton, Modal,Layout,Menu } from 'antd';
 import Header from '../Header/Header';
 import MailForm from './MailForm';
 import MailDetail from './MailDetail';

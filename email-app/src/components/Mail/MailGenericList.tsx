@@ -3,10 +3,9 @@ import { FC } from "react";
 import { Mail } from "../../types/mail";
 import { DeleteFilled, FolderOutlined, ReloadOutlined } from "@ant-design/icons";
 import MailItem from "./MailItem";
-import { useAppSelector } from "../../hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks";
 import { useMailsByFolderQuery } from "../../features/mail/mailAPI";
 import { useDeleteFolderByIdMutation } from "../../features/folder/folderAPI";
-import { useAppDispatch } from "../../hooks";
 import { setFolder } from "../../features/folder/folderSlice";
 
 type MailGenericListProps = {

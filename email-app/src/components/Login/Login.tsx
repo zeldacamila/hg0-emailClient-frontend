@@ -6,6 +6,8 @@ import { useAppDispatch } from '../../hooks';
 import { useSigninMutation } from '../../features/auth/authAPI';
 import { setToken, setUser } from '../../features/auth/userSlice';
 import { UserSignin } from '../../types/user';
+import { Provider } from 'react-redux';
+import { store } from '../../store';
 
 /**
  * The `Login` component provides a user interface for user authentication.
@@ -43,60 +45,60 @@ const Login: React.FC = () => {
   };
 
   return (
-    <>
-      <Form
-        form={form}
-        name="Login"
-        onFinish={onFinish}
-        style={{ maxWidth: 600 }}
+    <Provider store={store}>
+    <Form
+      form={form}
+      name="Login"
+      onFinish={onFinish}
+      style={{ maxWidth: 600 }}
+    >
+      <Form.Item>
+        <h1>Login</h1>
+      </Form.Item>
+      <Form.Item
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your email!',
+          },
+        ]}
       >
-        <Form.Item>
-          <h1>Login</h1>
-        </Form.Item>
-        <Form.Item
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your email!',
-            },
-          ]}
-        >
-          <Input
-            prefix={<UserOutlined />}
-            placeholder="Email"
-            suffix="@awesomemailbox.net"
-          />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
-        >
-          <Input.Password
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            placeholder="Password"
-          />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Sign in
-          </Button>
-        </Form.Item>
-        <Form.Item>
-          <div className="sign-up-link-container">
-            Don't have an account?{' '}
-            <Link to="/signup" className="sign-up-link">
-              Register now!
-            </Link>
-          </div>
-        </Form.Item>
-      </Form>
-    </>
+        <Input
+          prefix={<UserOutlined />}
+          placeholder="Email"
+          suffix="@awesomemailbox.net"
+        />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your password!',
+          },
+        ]}
+      >
+        <Input.Password
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          placeholder="Password"
+        />
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Sign in
+        </Button>
+      </Form.Item>
+      <Form.Item>
+        <div className="sign-up-link-container">
+          Don't have an account?{' '}
+          <Link to="/signup" className="sign-up-link">
+            Register now!
+          </Link>
+        </div>
+      </Form.Item>
+    </Form>
+    </Provider>
   );
 };
 
