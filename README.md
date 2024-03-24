@@ -40,7 +40,7 @@ To better integrate our projects, we created a table on a Notion page. on which 
 
 ## New features
 
-<<<<<<< HEAD
+
 ### Feature 1 -> W3C Standards
 
 - Dont need changes
