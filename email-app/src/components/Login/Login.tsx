@@ -6,6 +6,8 @@ import { useAppDispatch } from '../../hooks';
 import { useSigninMutation } from '../../features/auth/authAPI';
 import { setToken, setUser } from '../../features/auth/userSlice';
 import { UserSignin } from '../../types/user';
+import { Provider } from 'react-redux';
+import { store } from '../../store';
 
 /**
  * The `Login` component provides a user interface for user authentication.
@@ -43,6 +45,7 @@ const Login: React.FC = () => {
   };
 
   return (
+    <Provider store={store}>
     <Form
       form={form}
       name="Login"
@@ -95,6 +98,7 @@ const Login: React.FC = () => {
         </div>
       </Form.Item>
     </Form>
+    </Provider>
   );
 };
 
