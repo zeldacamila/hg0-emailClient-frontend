@@ -87,6 +87,7 @@ As mentioned earlier, each component has its documentation. However, if you look
 
 1. Run Storybook:
 ```bash
+cd email-app
 npm run storybook
 ```
 
