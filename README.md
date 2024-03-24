@@ -64,7 +64,7 @@ Manually, all links and clickable parts of the page were tested to ensure they f
 **Result:** The page has very adequate tab navigation, allowing smooth movement through all parts of the page without any issues.</br>
 > Accessibility testing with Storybook :
 - **Test:** The components were tested using Storybook and its accessibility section with the addon called addon a11y - Accessibility.</br>
-**Result:** The accessibility tests yielded very good results, as seen in Image 1, where the Login component was analyzed under Storybook's accessibility requirements. It showed 23 passed tests and 1 failed test.<center>![Imagen3](imgReadme\accessibility.png)</center>
+**Result:** The accessibility tests yielded very good results, as seen in Image 1, where the Login component was analyzed under Storybook's accessibility requirements. It showed 23 passed tests and 1 failed test.<center>![Imagen3](imgReadme/accessibility.png)</center>
 
 
 
@@ -75,13 +75,9 @@ In this feature, Storybook was implemented, which is a frontend tool that offers
 In the HG-0 project, they had dependencies of Babel installed to use Jest for unit testing. However, with the version `Storybook 8.0.4`  being used, there was a conflict with Babel. This was because earlier versions of Storybook used Babel. The issue was resolved by uninstalling the Babel dependencies and reinstalling Jest without them, as an addon of Storybook. This approach worked as expected.
 
 > Docs:
-In this feature, Storybook was implemented, which is a frontend tool that offers various capabilities such as testing and creating components in isolation, as well as automatically documenting components, among other possibilities. In the image below, you can see the MailForm component, which is documented.</br><center>![Imagen3](imgReadme\mailFormComponent.png)</center>
+In this feature, Storybook was implemented, which is a frontend tool that offers various capabilities such as testing and creating components in isolation, as well as automatically documenting components, among other possibilities. In the image below, you can see the MailForm component, which is documented.</br><center>![Imagen3](imgReadme/mailFormComponent.png)</center>
 > Preview:
-As mentioned earlier, each component has its documentation. However, if you look below the documentation, you can see the rendered document, which refers to the ability to create and test components in isolation. This functionality was successfully implemented into the code.</br><center>![Imagen3](imgReadme\LoginComponent.png)</center>
-
-
-![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/7370cda2-14bd-4b2d-8506-6f7905c3d5af)
-![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/aaf033df-15b7-45f1-8661-c871e6c0b6da)
+As mentioned earlier, each component has its documentation. However, if you look below the documentation, you can see the rendered document, which refers to the ability to create and test components in isolation. This functionality was successfully implemented into the code.</br><center>![Imagen3](imgReadme/LoginComponent.png)</center>
 
 ## How to run the Storybook
 
