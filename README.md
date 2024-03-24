@@ -10,38 +10,45 @@ To better integrate our projects, we created a table on a Notion page. on which 
 ### Maintability Issues
 
 1. On **email-app/Dockerfile**
-    > **Replace 'as' with an uppercase format `AS`.**
-    -    >This change was made because using uppercase in instructions enhances readability and clarity, especially during collaborations within development teams. Change date: ***17/03/2024***
-    > **This line added --ignore-scripts to the RUN npm install command.**
-    -    >this change was made so that npm will install the project dependencies, but will not run any scripts defined in the package.json file. Change date: ***17/03/2024***
-2.  On **email-app/src/App.tsx**
-    >   **Consolidated multiple calls to `./hooks` into a single line.**
-    -   >This change was made because importing the same module multiple times affects code readability and maintainability. Change date: ***17/03/2024***
-    >  **Removed empty <> </> enclosing the code fragment in the return statement.**
-    -    >This change was made because it's redundant in React; if only one element or component is returned, <> </> tags are unnecessary. Change date: ***17/03/2024***
-3. On **email-app/src/__test__/Login.test.jsx**
-    > **Removed commented-out code.**
-    -    >This change was made because commented-out code distracts attention from the code that is actually being executed and increases maintenance overhead. Change date: ***17/03/2024***
+   > **Replace 'as' with an uppercase format `AS`.**
+   - > This change was made because using uppercase in instructions enhances readability and clarity, especially during collaborations within development teams. Change date: **_17/03/2024_** > **This line added --ignore-scripts to the RUN npm install command.**
+   - > this change was made so that npm will install the project dependencies, but will not run any scripts defined in the package.json file. Change date: **_17/03/2024_**
+2. On **email-app/src/App.tsx**
+   > **Consolidated multiple calls to `./hooks` into a single line.**
+   - > This change was made because importing the same module multiple times affects code readability and maintainability. Change date: **_17/03/2024_**
+     > **Removed empty <> </> enclosing the code fragment in the return statement.**
+   - > This change was made because it's redundant in React; if only one element or component is returned, <> </> tags are unnecessary. Change date: **_17/03/2024_**
+3. On **email-app/src/**test**/Login.test.jsx**
+   > **Removed commented-out code.**
+   - > This change was made because commented-out code distracts attention from the code that is actually being executed and increases maintenance overhead. Change date: **_17/03/2024_**
 4. On **email-app/src/components/Login/Login.tsx**
-    > **Removed empty <> </> enclosing the code fragment in the return statement.**
-    -    >This change was made because it's redundant in React; if only one element or component is returned, <> </> tags are unnecessary. Change date: ***17/03/2024***
+   > **Removed empty <> </> enclosing the code fragment in the return statement.**
+   - > This change was made because it's redundant in React; if only one element or component is returned, <> </> tags are unnecessary. Change date: **_17/03/2024_**
 5. On **email-app/src/components/Mail/MailContainer.tsx**
-    > **Consolidated multiple calls to `antd` into a single line.**
-    -   > This change was made because importing the same module multiple times affects code readability and maintainability. Change date: ***17/03/2024***
+   > **Consolidated multiple calls to `antd` into a single line.**
+   - > This change was made because importing the same module multiple times affects code readability and maintainability. Change date: **_17/03/2024_**
 6. On **email-app/src/components/Mail/MailGenericList.tsx**
-    >   **Consolidated multiple calls to `./hooks` into a single line.**
-    -   >This change was made because importing the same module multiple times affects code readability and maintainability. Change date: ***17/03/2024***
+   > **Consolidated multiple calls to `./hooks` into a single line.**
+   - > This change was made because importing the same module multiple times affects code readability and maintainability. Change date: **_17/03/2024_**
 7. On **email-app/src/components/SignUpForm/SignUpForm.tsx**
-    > **Removed empty <> </> enclosing the code fragment in the return statement.**
-    -    >This change was made because it's redundant in React; if only one element or component is returned, <> </> tags are unnecessary. Change date: ***17/03/2024***
-     > **Corrected the regex for password validation, as it had unnecessary character escapes triggered by a \.**
-    -    >This change was made because in the special characters part [^$*.{}()?"!@#%&/\,><':;|_~], some characters are unnecessarily escaped. Within brackets [], only ^, -, ], and ` need to be escaped. The rest do not need to be escaped. Change date: ***17/03/2024***
-6. On **email-app/src/store.ts**
-    >Consolidated multiple calls to `@reduxjs/toolkit` into a single line.
-    -    >It was changed because importing the same module multiple times affects code readability and maintainability. Change date: ***17/03/2024***
+   > **Removed empty <> </> enclosing the code fragment in the return statement.**
+   - > This change was made because it's redundant in React; if only one element or component is returned, <> </> tags are unnecessary. Change date: **_17/03/2024_** > **Corrected the regex for password validation, as it had unnecessary character escapes triggered by a \.**
+   - > This change was made because in the special characters part [^$*.{}()?"!@#%&/\,><':;|_~], some characters are unnecessarily escaped. Within brackets [], only ^, -, ], and ` need to be escaped. The rest do not need to be escaped. Change date: **_17/03/2024_**
+8. On **email-app/src/store.ts**
+   > Consolidated multiple calls to `@reduxjs/toolkit` into a single line.
+   - > It was changed because importing the same module multiple times affects code readability and maintainability. Change date: **_17/03/2024_**
 
 ## New features
 
+<<<<<<< HEAD
+### Feature 1 -> W3C Standards
+
+- Dont need changes
+
+### Feature 2 -> Storybook
+
+-
+=======
 ### Feature 1 -> W3C Standards No Changes
  For this feature we checked the W3C standards to make sure that the page complies with the accessibility requirements, as this is something that all web pages should comply with and it works correctly. We performed several tests, which will be mentioned below along with their respective results:
 > Browser Compatibility:
@@ -64,21 +71,27 @@ Manually, all links and clickable parts of the page were tested to ensure they f
 **Result:** The page has very adequate tab navigation, allowing smooth movement through all parts of the page without any issues.</br>
 > Accessibility testing with Storybook :
 - **Test:** The components were tested using Storybook and its accessibility section with the addon called addon a11y - Accessibility.</br>
-**Result:** The accessibility tests yielded very good results, as seen in Image 1, where the Login component was analyzed under Storybook's accessibility requirements. It showed 23 passed tests and 1 failed test.<center>![Imagen3](imgReadme\accessibility.png)</center>
+**Result:** The accessibility tests yielded very good results, as seen in Image 1, where the Login component was analyzed under Storybook's accessibility requirements. It showed 23 passed tests and 1 failed test.<center>![Imagen3](imgReadme/accessibility.png)</center>
 
 
 
 
 ### Feature 2 -> Storybook
 In this feature, Storybook was implemented, which is a frontend tool that offers various capabilities such as testing, creating and testing components in isolation, and automatically documenting components, among other possibilities.</br>
+>>>>>>> 63face2c4bf9ae3fbf3d62a21eb25b310e7a2494
 
 In the HG-0 project, they had dependencies of Babel installed to use Jest for unit testing. However, with the version `Storybook 8.0.4`  being used, there was a conflict with Babel. This was because earlier versions of Storybook used Babel. The issue was resolved by uninstalling the Babel dependencies and reinstalling Jest without them, as an addon of Storybook. This approach worked as expected.
 
 > Docs:
-In this feature, Storybook was implemented, which is a frontend tool that offers various capabilities such as testing and creating components in isolation, as well as automatically documenting components, among other possibilities. In the image below, you can see the MailForm component, which is documented.</br><center>![Imagen3](imgReadme\mailFormComponent.png)</center>
+In this feature, Storybook was implemented, which is a frontend tool that offers various capabilities such as testing and creating components in isolation, as well as automatically documenting components, among other possibilities. In the image below, you can see the MailForm component, which is documented.</br><center>![Imagen3](imgReadme/mailFormComponent.png)</center>
 > Preview:
-As mentioned earlier, each component has its documentation. However, if you look below the documentation, you can see the rendered document, which refers to the ability to create and test components in isolation. This functionality was successfully implemented into the code.</br><center>![Imagen3](imgReadme\LoginComponent.png)</center>
+As mentioned earlier, each component has its documentation. However, if you look below the documentation, you can see the rendered document, which refers to the ability to create and test components in isolation. This functionality was successfully implemented into the code.</br><center>![Imagen3](imgReadme/LoginComponent.png)</center>
 
+## Architectural Change
+
+Regarding the architectural changes, it was decided to continue with a deployment on an EC2, with an RDS and Route53.
+
+As for the database, it was migrated from postgreSQL to MySQL. Along with this, a route 53 with a domain was implemented to resolve the DNS of the EC2 machine. (http://awesome.snoopjake.net)
 
 ![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/7370cda2-14bd-4b2d-8506-6f7905c3d5af)
 ![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/aaf033df-15b7-45f1-8661-c871e6c0b6da)
@@ -111,8 +124,10 @@ We **succesfully fixed all the vulnerabilities found initially**, **for the 1.8 
 Test coverage was implemented, but no tests exist so coverage is 0%!
 
 ///////////////////////////////////////////////////
+>>>>>>> 63face2c4bf9ae3fbf3d62a21eb25b310e7a2494
 
 # Email Client Project
+
 This is the frontend interface for an email client.
 Check the backend here (https://github.com/zeldacamila/hg0-emailClient-backend)
 
@@ -122,7 +137,8 @@ Check the backend here (https://github.com/zeldacamila/hg0-emailClient-backend)
 - User Registration and Login System
 - Email Organization
 - Basic Email Search Functionality
-- 
+-
+
 ## Technologies Used
 
 - [React](https://react.dev/)
@@ -150,14 +166,16 @@ npm run dev
 ```
 
 ## Environment Variables
+
 These are only used for the github actions that are implemented on this repo.
 To run this project, you will need to add the following environment variables to your github repository. Do not include sensitive information directly in your project files or documentation.
 
-``` bash
+```bash
 DOCKER_USERNAME='your_dockerhub_user'
 DOCKER_PASSWORD='your_dockerhub_password'
 API_URL='your_api_url'
 ```
 
 ## Usage
+
 - Access http://localhost:5173/ in your browser to interact with the application.
