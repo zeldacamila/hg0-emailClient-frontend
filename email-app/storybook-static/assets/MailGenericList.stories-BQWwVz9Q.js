@@ -1,0 +1,5 @@
+import{j as e}from"./jsx-runtime-DQ32znRX.js";import{M as i}from"./MailGenericList-CQ95uh-z.js";import{B as m,P as n,s as p}from"./index-BSkGTUui.js";import"./index-DH5ua8nC.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./MailItem-8eNlYCuq.js";import"./index-npzJyFh_.js";import"./isNativeReflectConstruct-9pqpKM1A.js";import"./index-CmIfq4uN.js";import"./col-DidA2-JF.js";import"./UserOutlined-D7lX2XaZ.js";import"./ReloadOutlined-BGCLIHMI.js";const R={title:"Componentes/Mail/MailGenericList",component:i,tags:["autodocs"]},c=a=>e.jsx(m,{children:e.jsx(n,{store:p,children:e.jsx(i,{...a})})}),r=c.bind({});r.args={};var o,t,s;r.parameters={...r.parameters,docs:{...(o=r.parameters)==null?void 0:o.docs,source:{originalSource:`args => <BrowserRouter>\r
+  <Provider store={store}>\r
+    <MailGenericList {...args} />\r
+  </Provider>\r
+  </BrowserRouter>`,...(s=(t=r.parameters)==null?void 0:t.docs)==null?void 0:s.source}}};const _=["Default"];export{r as Default,_ as __namedExportsOrder,R as default};

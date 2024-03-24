@@ -1,5 +1,10 @@
 # SnoopJake TEAM CHANGELOG
 
+# Milestone 2. Accords between HomeGroups
+
+To better integrate our projects, we created a table on a Notion page. on which we recopilated our ideas for changes and our progress [Tasks Table](https://www.notion.so/Legacy-Maintainability-4d1286ae270a40febe66bb4e588cdc37?pvs=4)
+![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/5b3e90fd-238e-499e-afee-a60b02b7a2e3)
+
 ## SonarCloud code quality fixes
 
 ### Maintability Issues
@@ -35,6 +40,7 @@
 
 ## New features
 
+<<<<<<< HEAD
 ### Feature 1 -> W3C Standards
 
 - Dont need changes
@@ -42,16 +48,84 @@
 ### Feature 2 -> Storybook
 
 -
+=======
+### Feature 1 -> W3C Standards No Changes
+ For this feature we checked the W3C standards to make sure that the page complies with the accessibility requirements, as this is something that all web pages should comply with and it works correctly. We performed several tests, which will be mentioned below along with their respective results:
+> Browser Compatibility:
+- **Test:** Compatibility was tested with different browsers such as Chrome, Firefox, Brave, Microsoft Edge.</br>
+**Result:** The page worked correctly in all tested browsers without any issues.</br>
+> Performance and Optimization:
+- **Test:** The performance and accessibility standards were tested using Google's Lighthouse extension locally, which analyzes aspects such as Performance, Accessibility, Best Practices, and SEO.</br></br>
+**Result 1:** Test #1 was conducted with both desktop (Image 1) and mobile (Image 2) versions of the login component, and we obtained excellent results in accessibility and best practices. Although the performance score was lower, this is likely due to running the test locally. <center>![Imagen1](imgReadme/LightHouse1.png)</center>
+<center>Image 1 y Image 2</center></br>
 
-Por que fue importante (desde la perspectiva de un negocio, como si estuvieran haciendo un pitch) y que hace
+- **Result 2:** The test #2 was performed with the desktop version (image 1) and mobile version (image 2) of the email component, and we obtained very good results in terms of accessibility and best practices. The performance score was lower, but this is likely due to running the test locally.<center>![Imagen2](imgReadme/LightHouse2.png)</center>
+<center>Image 1 y Image 2</center></br>
 
-mas features....
+> Link Validation:
+- **Test:** 
+Manually, all links and clickable parts of the page were tested to ensure they functioned correctly.</br>
+**Result:** All links work as expected, and those that do not lead anywhere display a 404 error page, which is perfect</br>
+> HTML Validation:
+- **Test:** Manually, it was tested that the components brought by the page are appropriately named and easily navigable.</br>
+**Result:** The page has very adequate tab navigation, allowing smooth movement through all parts of the page without any issues.</br>
+> Accessibility testing with Storybook :
+- **Test:** The components were tested using Storybook and its accessibility section with the addon called addon a11y - Accessibility.</br>
+**Result:** The accessibility tests yielded very good results, as seen in Image 1, where the Login component was analyzed under Storybook's accessibility requirements. It showed 23 passed tests and 1 failed test.<center>![Imagen3](imgReadme\accessibility.png)</center>
 
+
+
+
+### Feature 2 -> Storybook
+In this feature, Storybook was implemented, which is a frontend tool that offers various capabilities such as testing, creating and testing components in isolation, and automatically documenting components, among other possibilities.</br>
+>>>>>>> 63face2c4bf9ae3fbf3d62a21eb25b310e7a2494
+
+In the HG-0 project, they had dependencies of Babel installed to use Jest for unit testing. However, with the version `Storybook 8.0.4`  being used, there was a conflict with Babel. This was because earlier versions of Storybook used Babel. The issue was resolved by uninstalling the Babel dependencies and reinstalling Jest without them, as an addon of Storybook. This approach worked as expected.
+
+> Docs:
+In this feature, Storybook was implemented, which is a frontend tool that offers various capabilities such as testing and creating components in isolation, as well as automatically documenting components, among other possibilities. In the image below, you can see the MailForm component, which is documented.</br><center>![Imagen3](imgReadme\mailFormComponent.png)</center>
+> Preview:
+As mentioned earlier, each component has its documentation. However, if you look below the documentation, you can see the rendered document, which refers to the ability to create and test components in isolation. This functionality was successfully implemented into the code.</br><center>![Imagen3](imgReadme\LoginComponent.png)</center>
+
+<<<<<<< HEAD
 ## Architectural Change
 
 Regarding the architectural changes, it was decided to continue with a deployment on an EC2, with an RDS and Route53.
 
 As for the database, it was migrated from postgreSQL to MySQL. Along with this, a route 53 with a domain was implemented to resolve the DNS of the EC2 machine. (http://awesome.snoopjake.net)
+=======
+
+![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/7370cda2-14bd-4b2d-8506-6f7905c3d5af)
+![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/aaf033df-15b7-45f1-8661-c871e6c0b6da)
+
+## How to run the Storybook
+
+1. Run Storybook:
+```bash
+npm run storybook
+```
+
+This will start Storybook and open your default browser to the Storybook page, where you can view and interact with the components.
+
+
+### Feature 3 -> Automated Static code review and test coverage with SonarCloud
+We implemented a CI workflow that checked the code on Push and Pull Request actions on GitHub.
+
+The overall analysis can be found at https://sonarcloud.io/summary/overall?id=Tech-Fellows-SnoopJake_hg0-emailClient-frontend
+
+On each commit, a SonarCloud badge can be seen, which analyzes how many quality problems were introduced due to that specific commit:
+
+![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/b5d4adf7-3f45-48ef-8376-f185401d87d5)
+![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/3f792f99-9ca4-4cb0-a7c3-46d73cc3fc7d)
+
+We **succesfully fixed all the vulnerabilities found initially**, **for the 1.8 lines of code analyzed!**
+
+![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/4285bcb7-7924-42e4-ab54-bd042e428cf9)
+
+Test coverage was implemented, but no tests exist so coverage is 0%!
+
+///////////////////////////////////////////////////
+>>>>>>> 63face2c4bf9ae3fbf3d62a21eb25b310e7a2494
 
 # Email Client Project
 
