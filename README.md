@@ -75,6 +75,11 @@ In this feature, Storybook was implemented, which is a frontend tool that offers
 As mentioned earlier, each component has its documentation. However, if you look below the documentation, you can see the rendered document, which refers to the ability to create and test components in isolation. This functionality was successfully implemented into the code.</br><center>![Imagen3](imgReadme\LoginComponent.png)</center>
 
 
+![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/7370cda2-14bd-4b2d-8506-6f7905c3d5af)
+![image](https://github.com/Tech-Fellows-SnoopJake/hg0-emailClient-frontend/assets/49454068/aaf033df-15b7-45f1-8661-c871e6c0b6da)
+
+
+
 ### Feature 3 -> Automated Static code review and test coverage with SonarCloud
 We implemented a CI workflow that checked the code on Push and Pull Request actions on GitHub.
 
