@@ -44,10 +44,10 @@
 **Result:** The page worked correctly in all tested browsers without any issues.</br>
 > Performance and Optimization:
 - **Test:** The performance and accessibility standards were tested using Google's Lighthouse extension locally, which analyzes aspects such as Performance, Accessibility, Best Practices, and SEO.</br></br>
-**Result 1:** Test #1 was conducted with both desktop (Image 1) and mobile (Image 2) versions of the login component, and we obtained excellent results in accessibility and best practices. Although the performance score was lower, this is likely due to running the test locally. <center>![Imagen1](imgReadme\LightHouse1.png)</center>
+**Result 1:** Test #1 was conducted with both desktop (Image 1) and mobile (Image 2) versions of the login component, and we obtained excellent results in accessibility and best practices. Although the performance score was lower, this is likely due to running the test locally. <center>![Imagen1](imgReadme/LightHouse1.png)</center>
 <center>Image 1 y Image 2</center></br>
 
-- **Result 2:** The test #2 was performed with the desktop version (image 1) and mobile version (image 2) of the email component, and we obtained very good results in terms of accessibility and best practices. The performance score was lower, but this is likely due to running the test locally.<center>![Imagen2](imgReadme\LightHouse2.png)</center>
+- **Result 2:** The test #2 was performed with the desktop version (image 1) and mobile version (image 2) of the email component, and we obtained very good results in terms of accessibility and best practices. The performance score was lower, but this is likely due to running the test locally.<center>![Imagen2](imgReadme/LightHouse2.png)</center>
 <center>Image 1 y Image 2</center></br>
 
 > Link Validation:
