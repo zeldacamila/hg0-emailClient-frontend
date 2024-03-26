@@ -19,18 +19,18 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
         run: |
-          docker build -t zeldacamila/email-app ./email-app \
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/email-app ./email-app \
           --build-arg VITE_REACT_APP_API_URL=${{ secrets.API_URL }}
       - name: Publish image to docker hub
-        run: docker push zeldacamila/email-app:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/email-app:latest
 
   deploy:
     needs: build
     runs-on: aws-ec2
     steps:
       - name: Pull image from docker hub
-        run: docker pull zeldacamila/email-app:latest
+        run: docker pull ${{ secrets.DOCKER_USERNAME }}/email-app:latest
       - name: Delete Old Container
         run: docker rm -f frontendContainer
       - name: Run docker container
-        run: docker run -d -p 80:80 --name frontendContainer zeldacamila/email-app:latest
+        run: docker run -d -p 80:80 --name frontendContainer ${{ secrets.DOCKER_USERNAME }}/email-app:latest
