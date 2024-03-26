@@ -47,3 +47,4 @@ API_URL='your_api_url'
 
 ## Usage
 - Access http://localhost:5173/ in your browser to interact with the application.
+- Run actiosn
